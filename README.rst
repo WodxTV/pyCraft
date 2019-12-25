@@ -19,13 +19,6 @@ Detailed information for developers can be found here:
 ``start.py`` is a basic example of a headless client using the library
 Use ``start.py --help`` for the options.
 
-How to use UUID spoofing
-------------------------
-**Note:** spoof_uuid must not contain dashes!::
-    from minecraft.networking.connection import Connection
-    from minecraft.networking.packets import clientbound, serverbound
-    connection = Connection(host, port, username='pyCraft', spoof_uuid='069a79f444e94726a5befca90e38aaf5', spoof_ip='255.255.255.255')
-
 Supported Minecraft versions
 ----------------------------
 pyCraft is compatible with the following Minecraft releases:
