@@ -21,11 +21,10 @@ Use ``start.py --help`` for the options.
 
 How to use UUID spoofing
 ------------------------
-::
-from minecraft.networking.connection import Connection
-from minecraft.networking.packets import clientbound, serverbound
-connection = Connection(host, port, username='pyCraft', spoof_uuid='069a79f444e94726a5befca90e38aaf5', spoof_ip='255.255.255.255')
-::
+``from minecraft.networking.connection import Connection``
+``from minecraft.networking.packets import clientbound, serverbound``
+``connection = Connection(host, port, username='pyCraft', spoof_uuid='069a79f444e94726a5befca90e38aaf5', spoof_ip='255.255.255.255')``
+
 **Note:** spoof_uuid must not contain dashes!
 
 Supported Minecraft versions
