@@ -56,6 +56,9 @@ class Connection(object):
         port=25565,
         auth_token=None,
         username=None,
+        spoof_uuid=None,
+        spoof_protocol=None,
+        spoof_ip='127.0.0.1',
         initial_version=None,
         allowed_versions=None,
         handle_exception=None,
@@ -73,6 +76,9 @@ class Connection(object):
                            object. If None, no authentication is attempted and
                            the server is assumed to be running in offline mode.
         :param username: Username string; only applicable in offline mode.
+        :param spoof_uuid: UUID of the user the bot's UUID should be spoofed as.
+        :param spoof_protocol(int): Trick the server to believe the bot uses an other Minecraft version.
+        :param spoof_ip: Spoofed IP-address of the bot. This paramenter can be any IP-address, even private ones.
         :param initial_version: A Minecraft version ID string or protocol
                                 version number to use if the server's protocol
                                 version cannot be determined. (Although it is
@@ -146,6 +152,9 @@ class Connection(object):
         self.options.port = port
         self.auth_token = auth_token
         self.username = username
+        self.spoof_uuid = spoof_uuid
+        self.spoof_protocol = spoof_protocol
+        self.spoof_ip = spoof_ip
         self.connected = False
 
         self.handle_exception = handle_exception
@@ -445,8 +454,8 @@ class Connection(object):
 
     def _handshake(self, next_state=STATE_PLAYING):
         handshake = serverbound.handshake.HandShakePacket()
-        handshake.protocol_version = self.context.protocol_version
-        handshake.server_address = self.options.address
+        handshake.protocol_version = self.spoof_protocol if self.spoof_protocol else self.context.protocol_version
+        handshake.server_address = '%s\000%s\000%s' % (self.options.address, self.spoof_ip, self.spoof_uuid) if self.spoof_uuid else self.options.address
         handshake.server_port = self.options.port
         handshake.next_state = next_state
 
