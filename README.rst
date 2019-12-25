@@ -1,4 +1,4 @@
-pyCraft - fork by wodx
+pyCraft - Fork by wodx
 =======
 .. image:: https://travis-ci.org/ammaraskar/pyCraft.svg?branch=master
     :target: https://travis-ci.org/ammaraskar/pyCraft
